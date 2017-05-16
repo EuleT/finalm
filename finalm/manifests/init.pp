@@ -24,10 +24,16 @@ class paras{
 		content => "<h1>Heippa Xubu!</h1>\n",
 		}
 
-	service {'ufw':
-		ensure => 'running',
-		enable => 'true',
-		status => 'active',
-		start => 'true',
+	package { 'ufw':
+		ensure => present,
+
+		}
+
+	exec {'ufw-enable':
+		command => "/usr/bin/yes | /usr/sbin/ufw enable",
+		}
+
+	exec {'ufw-allow':
+		command => "/usr/bin/yes | /usr/bin/ufw allow 80/tcp",
 		}
 	}
